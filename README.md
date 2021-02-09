@@ -31,5 +31,5 @@ The Chicago and New York City files also have the following two columns:
 - Birth Year
 
 ### Credits
-**Data source:** Motivate\
+**Data source:** Motivate [(https://www.motivateco.com)](https://www.motivateco.com/)\
 **Project and data description:** Udacity 'Explore US Bikeshare Data' project descriptions
