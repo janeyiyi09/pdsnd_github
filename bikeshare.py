@@ -199,10 +199,10 @@ def raw_data(city):
     count = 0
     raw_data = pd.read_csv(CITY_DATA[city]).rename(columns = {'Unnamed: 0' : ''})
     while True:
-        ans = input('\nWould you like to view individual trip data? Enter Y for yes, N for no.\n').lower()
+        ans = input("\nWould you like to view individual trip data? Enter 'Y' for yes, 'N' for no: ").lower()
         while ans not in ['y', 'n']:
             print("That's not a valid input.")
-            ans = input('Would you like to view individual data? Enter Y for yes, N for no.\n').lower()
+            ans = input("Would you like to view individual data? Enter 'Y' for yes, 'N' for no: ").lower()
         if ans == 'n':
             break
         else:
@@ -229,12 +229,12 @@ def main():
 
         raw_data(city)
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n').lower()
-        while restart not in ['yes', 'no']:
+        restart = input("\nWould you like to restart? Enter 'Y' for yes, 'N' for no: ").lower()
+        while restart not in ['y', 'n']:
             print("That's not a valid input.")
-            restart = input('Would you like to restart? Enter yes or no.\n').lower()
+            restart = input("Would you like to restart? Enter 'Y' for yes, 'N' for no: ").lower()
 
-        if restart.lower() != 'yes':
+        if restart.lower() != 'y':
             break
 
 
