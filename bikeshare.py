@@ -17,10 +17,18 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    city=input("Would you like to see data for Chicago, New York City, or Washington?\n").lower()
-    while city not in ["chicago", "new york city", "washington"]:
-        print("That's not a valid input.")
+    city_check = True
+    while city_check:
         city=input("Would you like to see data for Chicago, New York City, or Washington?\n").lower()
+        while city not in ["chicago", "new york city", "washington"]:
+            print("That's not a valid input.")
+            city=input("Would you like to see data for Chicago, New York City, or Washington?\n").lower()
+        check=input(f"Looks like  you want to hear about {city.title()}! Enter 'Y' for yes, 'N' to restart: ").lower()
+        while check not in ["y", "n"]:
+            print("That's not a valid input.")
+            check=input(f"Looks like  you want to hear about {city.title()}! Enter 'Y' for yes, 'N' to restart: ").lower()
+        if check == 'y':
+            city_check = False
 
     # TO DO: get user input for month (all, january, february, ... , june)
     month_options = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
@@ -81,20 +89,20 @@ def time_stats(df,month,day):
     months = ['January', 'February', 'March', 'April', 'May', 'June']
     if month == 'all':
         common_month = int(df['month'].mode()[0])
-        print('Most common Month:', months[common_month-1])
+        print('Most common Month:', months[common_month-1], ' Count: ', df['month'].value_counts().max())
 
 
     # TO DO: display the most common day of week
     if day == 'All':
         common_day = df['day_of_week'].mode()[0]
-        print('Most common Day:', common_day)
+        print('Most common Day:', common_day, ' Count: ', df['day_of_week'].value_counts().max())
 
 
     # TO DO: display the most common start hour
     df['hour'] = df['Start Time'].dt.hour
     common_hour = df['hour'].mode()[0]
 
-    print('Most common Start Hour:', common_hour)
+    print('Most common Start Hour:', common_hour,' Count: ', df['hour'].value_counts().max())
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -191,10 +199,10 @@ def raw_data(city):
     count = 0
     raw_data = pd.read_csv(CITY_DATA[city]).rename(columns = {'Unnamed: 0' : ''})
     while True:
-        ans = input('\nWould you like to view individual trip data? Enter Y for yes, N for no.\n').lower()
+        ans = input("\nWould you like to view individual trip data? Enter 'Y' for yes, 'N' for no: ").lower()
         while ans not in ['y', 'n']:
             print("That's not a valid input.")
-            ans = input('Would you like to view individual data? Enter Y for yes, N for no.\n').lower()
+            ans = input("Would you like to view individual data? Enter 'Y' for yes, 'N' for no: ").lower()
         if ans == 'n':
             break
         else:
@@ -221,12 +229,12 @@ def main():
 
         raw_data(city)
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n').lower()
-        while restart not in ['yes', 'no']:
+        restart = input("\nWould you like to restart? Enter 'Y' for yes, 'N' for no: ").lower()
+        while restart not in ['y', 'n']:
             print("That's not a valid input.")
-            restart = input('Would you like to restart? Enter yes or no.\n').lower()
+            restart = input("Would you like to restart? Enter 'Y' for yes, 'N' for no: ").lower()
 
-        if restart.lower() != 'yes':
+        if restart.lower() != 'y':
             break
 
 
